@@ -5,12 +5,17 @@
  * Functions file for child theme, enqueues parent and child stylesheets by default.
  *
  * @since	1.0.0
- * @package aa
+ * @package Orchid_Store_Child
  */
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
+
+if ( ! defined( 'ORCHID_STORE_CHILD_VER' ) ) {
+	// Chid theme version.
+	define( 'ORCHID_STORE_CHILD_VER', '1.0.1' );
 }
 
 if ( ! function_exists( 'orchid_store_child_enqueue_styles' ) ) {
@@ -28,7 +33,13 @@ if ( ! function_exists( 'orchid_store_child_enqueue_styles' ) ) {
 
 		// Enqueue Child theme's stylesheet.
 		// Setting 'parent-style' as a dependency will ensure that the child theme stylesheet loads after it.
-		wp_enqueue_style( 'orchid-store-child-style', get_stylesheet_directory_uri() . '/style.css', array( 'orchid-store-style', 'orchid-store-main-style' ) );
+		wp_enqueue_style(
+			'orchid-store-child-style',
+			get_stylesheet_directory_uri() . '/style.css',
+			array( 'orchid-store-style', 'orchid-store-main-style' ),
+			ORCHID_STORE_CHILD_VER,
+			'all'
+		);
 	}
 }
 // Add enqueue function to the desired action.
